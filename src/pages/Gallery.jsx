@@ -1,5 +1,10 @@
-function Gallery() {
-  return <div>Gallery</div>;
-}
+import Layout from "../components/Layout";
 
+function Gallery() {
+	return (
+		<Layout title={"GALLERY"}>
+			<p>Gallery Page</p>
+		</Layout>
+	);
+}
 export default Gallery;
