@@ -1,3 +1,6 @@
+import QuickNav from "./QuickNav";
+import Slogan from "./Slogan";
+
 function Hero() {
 	return (
 		<section className="relative flex h-screen w-full flex-wrap items-center justify-center overflow-hidden bg-white">
@@ -8,6 +11,8 @@ function Hero() {
 				muted
 				autoPlay
 			/>
+			<Slogan />
+			<QuickNav />
 		</section>
 	);
 }

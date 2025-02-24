@@ -52,8 +52,8 @@ function Footer() {
 			</section>
 
 			<section>
-				<h2>DCODELAB</h2>
-				<p>2024 dcodelab &copy; All Rights reserved.</p>
+				<h2>MEFLOWEB</h2>
+				<p>2024 mefloweb &copy; All Rights reserved.</p>
 			</section>
 		</footer>
 	);
