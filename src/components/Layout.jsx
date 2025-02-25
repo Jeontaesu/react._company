@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 import Breadcrumb from "./Breadcrumb";
 import { useLocation } from "react-router-dom";
 
@@ -6,9 +7,11 @@ function Layout({ title, children }) {
 
 	return (
 		<main>
-			<h2>{title}</h2>
-			{pathname !== "/" && <Breadcrumb />}
-			<section id={title.toLowerCase()}>{children}</section>
+			<h2 className={twMerge("font-raleway font-thin text-[7max]", pathname.includes("/youtube/") && "text-[4vmax]")}>
+				{title}
+			</h2>
+			{pathname !== "/" && !pathname.includes("/youtube/") && <Breadcrumb />}
+			<section id={title?.toLowerCase()}>{children}</section>
 		</main>
 	);
 }
