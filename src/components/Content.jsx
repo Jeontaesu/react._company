@@ -1,5 +1,7 @@
-function Content({ children }) {
-	return <section className="pb-40 pt-20">{children}</section>;
+import { twMerge } from "tailwind-merge";
+
+function Content({ children, className }) {
+	return <section className={twMerge("pb-40 pt-20", className)}>{children}</section>;
 }
 
 export default Content;

@@ -9,7 +9,8 @@ function Gnb() {
 			{pageData.map(({ path, name }, idx) => {
 				return (
 					// create GNB excluding dynamic router path
-					!path.includes("/:") && (
+					!path.includes("/:") &&
+					path !== "/" && (
 						<li key={idx} style={pathname === path ? { opacity: 1 } : { opacity: 0.4 }}>
 							<Link to={path}>{name}</Link>
 						</li>

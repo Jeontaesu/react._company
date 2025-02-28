@@ -9,11 +9,9 @@ import { twMerge } from "tailwind-merge";
 function Youtube() {
 	const [Lists, setLists] = useState([]);
 	const [Statistics, setStatistics] = useState(null);
-	console.log(Statistics);
 
-	const api_key = "AIzaSyBL2aWKM1JuVndhCDJAcTWpRE3_K7sBsnw";
+	const api_key = "AIzaSyDC60bIIkAJFzy7ji4a0Eo3AX6tYudhe1w";
 
-	//첫 번째 마운트시 유튜브 데이터 가져와서 Lists공간에 담아줌
 	useEffect(() => {
 		const pid = "PLHtvRFLN5v-W5bQjvyH8QTdQQhgflJ3nu";
 		const num = 11;
@@ -24,7 +22,6 @@ function Youtube() {
 			.then(json => setLists(json.items));
 	}, []);
 
-	//Lists 상태값을 의존성 배열에 등록해서 Lists에 유튜브 데이터가 담기자마자 두번째 요청인 조회수 데이터 요청
 	useEffect(() => {
 		const req_vid = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${Lists[0]?.snippet.resourceId.videoId}&key=${api_key}`;
 		fetch(req_vid)
@@ -43,14 +40,14 @@ function Youtube() {
 			<Content>
 				{/* First Video Info */}
 				<article className="mb-40 flex flex-wrap justify-between">
-					<div className="max_md:[20vh] max_xl: max_xl: max_lg: mb-20 h-[20vw] h-[30vh] w-[55%] w-full max_xl:h-[40vh] max_sm:h-[17vh] [&_img:first-child]:opacity-50">
+					<div className="max_md:[20vh] h-[20vw] w-[55%] max_xl:mb-20 max_xl:h-[40vh] max_xl:w-full max_lg:h-[30vh] max_sm:h-[17vh] [&_img:first-child]:opacity-50">
 						<Link to={`/youtube/${Lists[0]?.id}`}>
 							<Thumbnail src={Lists[0]?.snippet.thumbnails.standard.url} className="size-full" />
 						</Link>
 					</div>
 
 					<div className="flex w-[40%] flex-wrap content-between max_xl:w-full">
-						<ul className="flex w-full [&>*]:w-1/3 [&_storng]:w-full [&_strong]:block [&_strong]:font-orbitron [&_strong]:font-light">
+						<ul className="flex w-full [&>*]:w-1/3 [&_strong]:block [&_strong]:w-full [&_strong]:font-orbitron [&_strong]:font-light">
 							<li>
 								<span>Like</span>
 								<strong className="text-4xl max_md:text-xl">{Statistics?.likeCount}</strong>

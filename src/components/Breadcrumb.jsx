@@ -1,28 +1,26 @@
+import { useLocation, Link } from "react-router-dom";
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
 
 function Breadcrumb() {
-	const { pathname } = useLocation(); // 현재 URL의 경로를 가져옴
-	// pathname => "/youtube/:id" => ["HOME", "YOUTUBE", "ID"]
-	const pathArr = pathname
-		.split("/") // 경로를 슬래시("/")로 분리
-		.map(path => (path === "" ? "HOME" : path.toUpperCase())); // 빈 문자열은 "HOME"으로, 나머지는 대문자로 변환
+	const { pathname } = useLocation();
+	//pathname => "/youtube/:id" => ["HOME","YOUTUBE","ID"]
+	const pathArr = pathname.split("/").map(path => (path === "" ? "HOME" : path.toUpperCase()));
 
 	return (
-		<nav>
+		<nav className="absolute right-[10vw] top-[200px] font-raleway text-sm font-light max_md:relative max_md:left-0 max_md:right-auto max_md:top-0 max_md:mt-4 [&>*]:mx-1 [&>strong]:font-bold">
 			{pathArr.map((path, idx) => {
 				return (
-					// 각 경로 부분을 Fragment로 감싸고, 고유 키를 부여
+					//Fragment with key
 					<React.Fragment key={idx}>
-						{idx !== 0 && <span>&gt;</span>} {/* 첫 번째 요소가 아닐 경우 구분 기호 추가 */}
+						{idx !== 0 && <span>&gt;</span>}
 						{idx !== pathArr.length - 1 ? (
-							// 마지막 요소가 아닐 경우 Link 컴포넌트 사용
+							//not last item : set Link
 							<span>
 								<Link to={"/" + path.toLowerCase()}>{path}</Link>
 							</span>
 						) : (
-							// 마지막 요소일 경우 강조된 텍스트로 표시
-							<strong>{path}</strong>
+							//last item : plain text
+							<strong>{path.substr(0, 14)}</strong>
 						)}
 					</React.Fragment>
 				);
