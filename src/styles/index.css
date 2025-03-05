@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#efefef];
+    @apply w-full overflow-x-hidden bg-[#efefef];
   }
 
   header {
