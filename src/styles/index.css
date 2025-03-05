@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  body {
+    @apply bg-[#efefef];
+  }
+
   header {
     @apply fixed z-20 flex w-full items-center justify-between border-b border-black/5 bg-white/5 px-[10vw] py-6 backdrop-blur-md;
   }
@@ -66,6 +70,19 @@
   .numberStyle {
     @apply font-orbitron text-xl font-semibold tracking-wider text-black/80 max_sm:text-lg;
   }
+
+  .label {
+    @apply mb-2 block w-full;
+  }
+
+  .input {
+    @apply w-full resize-none border-b border-black/50 bg-transparent py-2 text-xs outline-none;
+  }
+
+  .card {
+    @apply mb-10 min-h-[30vh] w-[30%] rounded bg-white p-6 shadow-sm max_xl:w-[48%] max_lg:w-[30%] max_md:w-[48%] max_sm:w-full;
+  }
+
 }
 
 /* scrollbar style */
