@@ -42,8 +42,9 @@ function Map() {
 
 	const [Index, setIndex] = useState(0);
 	const [Traffic, setTraffic] = useState(false);
+	const [Roadview, setRoadview] = useState(false);
 
-	//index - refresh map instance
+	//trigger when index changes
 	useEffect(() => {
 		const setCenter = () => {
 			console.log("setCenter called!!");
@@ -92,8 +93,14 @@ function Map() {
 	return (
 		<article id="map">
 			{/* map frame */}
-			<figure ref={ref_mapEl} className="h-[50vh] w-full bg-black"></figure>
-			<figure ref={ref_viewEl} className="mt-5 h-[50vh] w-full bg-black"></figure>
+			<figure className="relative h-[50vh] w-full bg-black">
+				<div
+					ref={ref_mapEl}
+					className={twMerge("absolute left-0 top-0 block h-full w-full", Roadview && "hidden")}></div>
+				<div
+					ref={ref_viewEl}
+					className={twMerge("absolute left-0 top-0 hidden h-full w-full", Roadview && "block")}></div>
+			</figure>
 
 			<nav className="mb-60 mt-6 flex flex-wrap justify-between">
 				{/* btn branch */}
@@ -109,10 +116,13 @@ function Map() {
 				</ul>
 
 				{/* btn etc */}
-				<div>
+				<div className="flex gap-2">
 					{/* 버튼 클릭시 Traffic 상태값 반전 */}
 					<button className={twMerge("btn", Traffic && "bg-pink-500")} onClick={() => setTraffic(!Traffic)}>
 						{Traffic ? "Traffic OFF" : "Traffic ON"}
+					</button>
+					<button className={twMerge("btn", Roadview && "bg-pink-500")} onClick={() => setRoadview(!Roadview)}>
+						{Roadview ? "Roadview OFF" : "Roadview ON"}
 					</button>
 				</div>
 			</nav>
