@@ -46,11 +46,6 @@ function Map() {
 
 	//trigger when index changes
 	useEffect(() => {
-		const setCenter = () => {
-			console.log("setCenter called!!");
-			ref_mapInstance.current.setCenter(ref_info.current[Index].latlng);
-		};
-
 		ref_mapEl.current.innerHTML = ""; //초기화
 		const { latlng, markerImg, markerSize, markerPos } = ref_info.current[Index];
 
@@ -78,7 +73,11 @@ function Map() {
 			viewInstance.setPanoId(panoId, latlng);
 		});
 
-		//resize event bind
+		const setCenter = () => {
+			ref_mapInstance.current.setCenter(ref_info.current[Index].latlng);
+		};
+
+		//window event bind
 		window.addEventListener("resize", setCenter);
 		//resize event unbind
 		return () => window.removeEventListener("resize", setCenter);
@@ -91,20 +90,26 @@ function Map() {
 	}, [Traffic, kakao]);
 
 	return (
-		<article id="map">
+		<article id="map" className="max_md:mt-20">
 			{/* map frame */}
 			<figure className="relative h-[50vh] w-full bg-black">
 				<div
 					ref={ref_mapEl}
-					className={twMerge("absolute left-0 top-0 block h-full w-full", Roadview && "hidden")}></div>
+					className={twMerge(
+						"absolute left-0 top-0 z-20 h-full w-full opacity-100",
+						Roadview && "z-10 opacity-0"
+					)}></div>
 				<div
 					ref={ref_viewEl}
-					className={twMerge("absolute left-0 top-0 hidden h-full w-full", Roadview && "block")}></div>
+					className={twMerge(
+						"absolute left-0 top-0 z-10 h-full w-full opacity-0",
+						Roadview && "z-20 opacity-100"
+					)}></div>
 			</figure>
 
 			<nav className="mb-60 mt-6 flex flex-wrap justify-between">
 				{/* btn branch */}
-				<ul className="flex gap-2">
+				<ul className="flex gap-2 max_md:mb-5">
 					{ref_info.current.map((el, idx) => (
 						<li
 							key={idx}
@@ -116,11 +121,13 @@ function Map() {
 				</ul>
 
 				{/* btn etc */}
-				<div className="flex gap-2">
-					{/* 버튼 클릭시 Traffic 상태값 반전 */}
-					<button className={twMerge("btn", Traffic && "bg-pink-500")} onClick={() => setTraffic(!Traffic)}>
-						{Traffic ? "Traffic OFF" : "Traffic ON"}
-					</button>
+				<div className="flex items-start gap-2">
+					{!Roadview && (
+						<button className={twMerge("btn", Traffic && "bg-pink-500")} onClick={() => setTraffic(!Traffic)}>
+							{Traffic ? "Traffic OFF" : "Traffic ON"}
+						</button>
+					)}
+
 					<button className={twMerge("btn", Roadview && "bg-pink-500")} onClick={() => setRoadview(!Roadview)}>
 						{Roadview ? "Roadview OFF" : "Roadview ON"}
 					</button>
