@@ -1,9 +1,10 @@
 import Layout from "../components/Layout";
+import Map from "../components/Map";
 
 function Contact() {
 	return (
 		<Layout title={"CONTACT"}>
-			<p>Contact Page</p>
+			<Map />
 		</Layout>
 	);
 }
