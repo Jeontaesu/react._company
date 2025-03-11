@@ -11,7 +11,7 @@ export default function MailForm() {
 	};
 
 	return (
-		<article className="my-24 flex w-full flex-wrap justify-between max_lg:mb-60">
+		<article className="my-24 flex w-full flex-wrap justify-between">
 			{/* form mail */}
 			<div className="max-lg:pr-0 mb-24 w-1/2 border-r border-black/30 pr-[8vw] max_lg:w-full max_lg:border-none">
 				<form ref={ref_form}>
@@ -24,7 +24,7 @@ export default function MailForm() {
 							<input type="text" name="user_name" id="uName" placeholder="Enter your name" className="input" />
 						</span>
 						<span>
-							<label htmlFor="uEmail" className="label">
+							<label htmlFor="uMail" className="label">
 								Email
 							</label>
 							<input type="email" name="user_email" id="uEmail" placeholder="Enter your email" className="input" />
