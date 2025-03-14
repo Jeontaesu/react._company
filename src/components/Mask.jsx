@@ -13,9 +13,9 @@ import { motion } from "framer-motion";
 function Mask({ delay = 0, duration = 0.5, className }) {
 	return (
 		<motion.div
-			className={twMerge("absolute left-0 top-0 z-30 h-screen w-full bg-black", className)}
-			initial={{ x: "-100%" }}
-			animate={{ x: "100%" }}
+			className={twMerge("absolute left-0 top-0 z-30 h-full w-full bg-black", className)}
+			initial={{ x: "-101%" }}
+			animate={{ x: "101%" }}
 			transition={{ duration, delay, ease: "easeInOut" }}></motion.div>
 	);
 }
