@@ -12,7 +12,8 @@ function Map() {
 	const ref_viewClient = useRef(new kakao.maps.RoadviewClient());
 	const ref_typeControl = useRef(new kakao.maps.MapTypeControl());
 	const ref_zoomControl = useRef(new kakao.maps.ZoomControl());
-
+	//지점 정보를 객체로 묶고 다시 배열로 그룹화해서 참조객체형태로 저장
+	//state에 저장하지 않은 이유는 자주 변경될 값이 아닌데 굳이 매번 데이터값을 관리해야 하는 state에 담을 필요가 없기 때문
 	const ref_info = useRef([
 		{
 			title: "COEX",
@@ -37,14 +38,11 @@ function Map() {
 		}
 	]);
 
-	//지점 정보를 객체로 묶고 다시 배열로 그룹화해서 참조객체형태로 저장
-	//state에 저장하지 않은 이유는 자주 변경될 값이 아닌데 굳이 매번 데이터값을 관리해야 하는 state에 담을 필요가 없기 때문
-
 	const [Index, setIndex] = useState(0);
 	const [Traffic, setTraffic] = useState(false);
 	const [Roadview, setRoadview] = useState(false);
 
-	//trigger when index changes
+	//index값이 변경될때마다 지도와 마커정보를 재 생성하면서 화면 갱신
 	useEffect(() => {
 		ref_mapEl.current.innerHTML = ""; //초기화
 		const { latlng, markerImg, markerSize, markerPos } = ref_info.current[Index];
@@ -77,9 +75,8 @@ function Map() {
 			ref_mapInstance.current.setCenter(ref_info.current[Index].latlng);
 		};
 
-		//window event bind
+		//window객체에 이벤트 연결시에는 아래처럼 컴포넌트 언마운트시 무조건 이벤트핸들러를 해제
 		window.addEventListener("resize", setCenter);
-		//resize event unbind
 		return () => window.removeEventListener("resize", setCenter);
 	}, [Index, kakao]);
 
@@ -113,6 +110,7 @@ function Map() {
 					{ref_info.current.map((el, idx) => (
 						<li
 							key={idx}
+							// 현재 반복되는 순서와 Index상태값에 등록된 활성화 순번이 동일하면 기본 btn스타일에 추가 스타일 덮어쓰기해서 버튼 활성화
 							className={twMerge("btn opacity-70", Index === idx && "bg-cyan-400 opacity-100")}
 							onClick={() => setIndex(idx)}>
 							{el.title}
