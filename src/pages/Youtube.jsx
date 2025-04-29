@@ -10,7 +10,7 @@ function Youtube() {
 	const [Lists, setLists] = useState([]);
 	const [Statistics, setStatistics] = useState(null);
 
-	const api_key = "import.meta.env.VITE_YOUTUBE_KEY";
+	const api_key = "AIzaSyDC60bIIkAJFzy7ji4a0Eo3AX6tYudhe1w";
 
 	useEffect(() => {
 		const pid = "PLHtvRFLN5v-W5bQjvyH8QTdQQhgflJ3nu";
